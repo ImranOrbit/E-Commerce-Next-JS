@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useEffect, useState } from "react";
@@ -97,7 +95,7 @@ export default function Products() {
 
     // Check if product already exists in cart
     const existingProductIndex = cart.findIndex(
-      (item) => item.product_id === product.id
+      (item) => item.product_id === product.id,
     );
 
     if (existingProductIndex !== -1) {
@@ -122,7 +120,7 @@ export default function Products() {
         hasOffer: product.hasOffer,
       };
       cart.push(cartItem);
-      
+
       Swal.fire({
         title: "Added to Cart!",
         text: `${product.name} has been added to your cart.`,
@@ -134,9 +132,13 @@ export default function Products() {
 
     // Save updated cart to localStorage
     localStorage.setItem("cart", JSON.stringify(cart));
-    
+
     // Dispatch event to update navbar cart count
     window.dispatchEvent(new Event("cartUpdated"));
+  };
+
+  const goToDetails = (id) => {
+    router.push(`/products/${id}`);
   };
 
   return (
@@ -210,9 +212,14 @@ export default function Products() {
               <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
                 {visibleProducts.length > 0 ? (
                   visibleProducts.map((product) => (
+                    // <div
+                    //   key={product.id}
+                    //   className="rounded-2xl bg-white shadow-sm hover:shadow-lg transition group"
+                    // >
                     <div
                       key={product.id}
-                      className="rounded-2xl bg-white shadow-sm hover:shadow-lg transition group"
+                      className="rounded-2xl bg-white shadow-sm hover:shadow-lg transition group cursor-pointer"
+                      onClick={() => goToDetails(product.id)}
                     >
                       <div className="relative overflow-hidden rounded-t-2xl">
                         <img
@@ -232,7 +239,7 @@ export default function Products() {
                         </h3>
 
                         {/* PRICE WITH OFFER */}
-                        <div className="mt-2 text-slate-800 font-bold">
+                        {/* <div className="mt-2 text-slate-800 font-bold">
                           {product.hasOffer ? (
                             <div className="flex items-center gap-2">
                               <span className="line-through text-slate-400 text-sm">
@@ -247,10 +254,37 @@ export default function Products() {
                               ${parseFloat(product.original_price).toFixed(2)}
                             </span>
                           )}
+                        </div> */}
+
+                        <div className="mt-2 text-slate-800 font-bold">
+                          {product.hasOffer ? (
+                            <div className="flex items-center gap-2">
+                              <span className="line-through text-slate-400 text-sm">
+                                £{parseFloat(product.original_price).toFixed(2)}
+                              </span>
+                              <span className="text-red-600 text-lg">
+                                £{parseFloat(product.final_price).toFixed(2)}
+                              </span>
+                            </div>
+                          ) : (
+                            <span className="text-lg">
+                              £{parseFloat(product.original_price).toFixed(2)}
+                            </span>
+                          )}
                         </div>
 
-                        <button
+                        {/* <button
                           onClick={() => addToCart(product)}
+                          className="mt-4 w-full rounded-full bg-blue-950 py-2.5 text-sm font-semibold text-white hover:bg-blue-800 transition duration-300 transform hover:scale-105"
+                        >
+                          Add to Cart
+                        </button> */}
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            addToCart(product);
+                          }}
                           className="mt-4 w-full rounded-full bg-blue-950 py-2.5 text-sm font-semibold text-white hover:bg-blue-800 transition duration-300 transform hover:scale-105"
                         >
                           Add to Cart

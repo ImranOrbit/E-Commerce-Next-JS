@@ -1,3 +1,5 @@
+
+
 // "use client";
 
 // import Link from "next/link";
@@ -22,7 +24,10 @@
 //   const loadCartCount = () => {
 //     if (typeof window !== "undefined") {
 //       const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-//       const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+//       const totalItems = cart.reduce(
+//         (sum, item) => sum + (item.quantity || 1),
+//         0,
+//       );
 //       setCartCount(totalItems);
 //     }
 //   };
@@ -204,185 +209,160 @@
 //       <div className="mx-auto max-w-7xl px-5">
 //         <div className="flex h-16 items-center justify-between">
 //           {/* Logo */}
-//           {!isLoggedIn ? (
-//             <Link href="/" className="flex items-center gap-2">
-//               <Image
-//                 src="/images/logo1.jpg"
-//                 alt="Health & Beauty"
-//                 width={40}
-//                 height={20}
-//                 className="rounded-full border-2 border-amber-400"
-//               />
+//           <Link href="/" className="flex items-center gap-2">
+//             <Image
+//               src="/images/logo1.png"
+//               alt="Health & Beauty"
+//               width={60}
+//               height={20}
+//               className="rounded-full border-amber-400"
+//             />
+//           </Link>
+
+//           {/* Desktop Menu -*/}
+//           <ul className="hidden md:flex flex-1 justify-center items-center gap-8 text-md font-medium">
+//             <Link
+//               href="/"
+//               className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
+//             >
+//               Home
 //             </Link>
-//           ) : (
-//             <div className="">
-//               <Image
-//                 src="/images/logo1.jpg"
-//                 alt="Health & Beauty"
-//                 width={40}
-//                 height={20}
-//                 className="rounded-full border-2 border-amber-400"
-//               />
-//             </div>
-//           )}
+//             <Link
+//               href="/products"
+//               className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
+//             >
+//               Products
+//             </Link>
+//             <Link
+//               href="/about"
+//               className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
+//             >
+//               About
+//             </Link>
+//             <Link
+//               href="/contact"
+//               className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
+//             >
+//               Contact
+//             </Link>
+//           </ul>
 
-//           {/* Desktop Menu - Show only when NOT logged in */}
-//           {!isLoggedIn && (
-//             <>
-//               <ul className="hidden md:flex flex-1 justify-center items-center gap-8 text-md font-medium">
-//                 <Link
-//                   href="/"
-//                   className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
-//                 >
-//                   Home
-//                 </Link>
-//                 <Link
-//                   href="/products"
-//                   className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
-//                 >
-//                   Products
-//                 </Link>
-//                 <Link
-//                   href="/about"
-//                   className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
-//                 >
-//                   About
-//                 </Link>
-//                 <Link
-//                   href="/contact"
-//                   className="text-gray-300 hover:text-amber-400 hover:bg-transparent px-3 py-1 rounded transition duration-300"
-//                 >
-//                   Contact
-//                 </Link>
-//               </ul>
-//               <div className="hidden md:flex items-center gap-6">
-//                 <Link href="/cart">
-//                   <div className="relative">
-//                     <FaShoppingCart className="text-amber-400 text-xl hover:text-amber-500 transition cursor-pointer" />
-//                     {cartCount > 0 && (
-//                       <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
-//                         {cartCount > 99 ? "99+" : cartCount}
-//                       </span>
-//                     )}
-//                   </div>
-//                 </Link>
-//                 <Link href="/login">
-//                   <button className="rounded-full bg-amber-400 px-5 py-2 text-sm text-black font-semibold cursor-pointer hover:bg-amber-500 transition duration-300 shadow-md">
-//                     Login
-//                   </button>
-//                 </Link>
+//           {/* Desktop Right Side */}
+//           <div className="hidden md:flex items-center gap-6">
+//             <Link href="/cart">
+//               <div className="relative">
+//                 <FaShoppingCart className="text-amber-400 text-xl hover:text-amber-500 transition cursor-pointer" />
+//                 {cartCount > 0 && (
+//                   <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
+//                     {cartCount > 99 ? "99+" : cartCount}
+//                   </span>
+//                 )}
 //               </div>
-//             </>
-//           )}
-
-//           {/* Profile Section - Show when logged in */}
-//           <div className="flex items-center gap-4">
-//             {isLoggedIn ? (
-//               <>
-//                 {/* Cart Icon for Logged In Users */}
-//                 <Link href="/cart">
-//                   <div className="relative">
-//                     <FaShoppingCart className="text-amber-400 text-xl hover:text-amber-500 transition cursor-pointer" />
-//                     {cartCount > 0 && (
-//                       <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center animate-pulse">
-//                         {cartCount > 99 ? "99+" : cartCount}
-//                       </span>
-//                     )}
-//                   </div>
-//                 </Link>
-
-//                 {/* Profile Dropdown */}
-//                 <div className="relative" ref={dropdownRef}>
-//                   <div
-//                     className="flex items-center gap-2 cursor-pointer"
-//                     onClick={() => setShowDropdown(!showDropdown)}
-//                   >
-//                     {/* Image -*/}
-//                     {user.profile_image ? (
-//                       <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border-2 border-amber-400">
-//                         <img
-//                           src={user.profile_image}
-//                           alt="Profile"
-//                           className="w-full h-full object-cover"
-//                           onError={(e) => {
-//                             console.log("Image failed to load");
-//                             e.target.style.display = "none";
-//                             // Simple fallback
-//                             const parent = e.target.parentElement;
-//                             const fallback = document.createElement("div");
-//                             fallback.className =
-//                               "w-full h-full flex items-center justify-center bg-gray-700";
-//                             fallback.innerHTML = `<span class="text-xs font-semibold text-amber-400">${user.name?.charAt(0) || "U"}</span>`;
-//                             parent.appendChild(fallback);
-//                           }}
-//                         />
-//                       </div>
-//                     ) : (
-//                       <FaUserCircle
-//                         size={30}
-//                         className="text-amber-400 hover:text-amber-500 transition"
-//                       />
-//                     )}
-//                     <span className="hidden md:inline text-gray-300 text-sm hover:text-amber-400 transition">
-//                       Profile
-//                     </span>
-//                   </div>
-//                   {showDropdown && (
-//                     <div className="absolute right-0 mt-4 w-48 bg-black border border-amber-400/30 rounded-lg shadow-lg p-4 text-sm z-50">
-//                       <div className="mb-3">
-//                         {/* Dropdown user info */}
-//                         <p className="font-semibold text-amber-400">
-//                           {user.name || "User"}
-//                         </p>
-//                         <p className="text-gray-400 truncate text-xs">
-//                           {user.email || "No Email"}
-//                         </p>
-//                       </div>
-//                       <div className="space-y-2">
-//                         <Link
-//                           href="/profile"
-//                           className="block text-gray-300 hover:text-amber-400 hover:bg-gray-900 py-2 px-3 rounded transition"
-//                           onClick={() => setShowDropdown(false)}
-//                         >
-//                           My Profile
-//                         </Link>
-//                         <Link
-//                           href="/orders"
-//                           className="block text-gray-300 hover:text-amber-400 hover:bg-gray-900 py-2 px-3 rounded transition"
-//                           onClick={() => setShowDropdown(false)}
-//                         >
-//                           My Orders
-//                         </Link>
-//                         <button
-//                           onClick={handleLogout}
-//                           className="w-full bg-amber-400 text-black font-semibold py-2 px-3 rounded hover:bg-amber-500 transition mt-2"
-//                         >
-//                           Logout
-//                         </button>
-//                       </div>
-//                     </div>
-//                   )}
-//                 </div>
-//               </>
-//             ) : (
-//               // Mobile Button - Show only when NOT logged in
+//             </Link>
+//             <Link href="/Buy">
 //               <button
-//                 onClick={() => setMenuOpen(!menuOpen)}
-//                 className="md:hidden text-3xl text-amber-400 hover:text-amber-500 transition"
+//                 type="button"
+//                 className="relative rounded-full bg-amber-400 px-5 py-2 text-sm font-semibold text-black cursor-pointer hover:bg-amber-500 transition duration-300 shadow-md flex items-center justify-center"
 //               >
-//                 {menuOpen ? "✕" : "☰"}
+//                 Buy
+//                 {cartCount > 0 && (
+//                   <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+//                     {cartCount > 99 ? "99+" : cartCount}
+//                   </span>
+//                 )}
 //               </button>
+//             </Link>
+
+//             {!isLoggedIn ? (
+//               <Link href="/login">
+//                 <button className="rounded-full bg-amber-400 px-5 py-2 text-sm text-black font-semibold cursor-pointer hover:bg-amber-500 transition duration-300 shadow-md">
+//                   Login
+//                 </button>
+//               </Link>
+//             ) : (
+//               <div className="relative" ref={dropdownRef}>
+//                 <div
+//                   className="flex items-center gap-2 cursor-pointer"
+//                   onClick={() => setShowDropdown(!showDropdown)}
+//                 >
+//                   {user.profile_image ? (
+//                     <div className="w-8 h-8 md:w-10 md:h-10 rounded-full overflow-hidden border-2 border-amber-400">
+//                       <img
+//                         src={user.profile_image}
+//                         alt="Profile"
+//                         className="w-full h-full object-cover"
+//                         onError={(e) => {
+//                           console.log("Image failed to load");
+//                           e.target.style.display = "none";
+//                           const parent = e.target.parentElement;
+//                           const fallback = document.createElement("div");
+//                           fallback.className =
+//                             "w-full h-full flex items-center justify-center bg-gray-700";
+//                           fallback.innerHTML = `<span class="text-xs font-semibold text-amber-400">${user.name?.charAt(0) || "U"}</span>`;
+//                           parent.appendChild(fallback);
+//                         }}
+//                       />
+//                     </div>
+//                   ) : (
+//                     <FaUserCircle
+//                       size={30}
+//                       className="text-amber-400 hover:text-amber-500 transition"
+//                     />
+//                   )}
+//                   <span className="hidden md:inline text-gray-300 text-sm hover:text-amber-400 transition">
+//                     Profile
+//                   </span>
+//                 </div>
+//                 {showDropdown && (
+//                   <div className="absolute right-0 mt-4 w-48 bg-black border border-amber-400/30 rounded-lg shadow-lg p-4 text-sm z-50">
+//                     <div className="mb-3">
+//                       <p className="font-semibold text-amber-400">
+//                         {user.name || "User"}
+//                       </p>
+//                       <p className="text-gray-400 truncate text-xs">
+//                         {user.email || "No Email"}
+//                       </p>
+//                     </div>
+//                     <div className="space-y-2">
+//                       <Link
+//                         href="/profile"
+//                         className="block text-gray-300 hover:text-amber-400 hover:bg-gray-900 py-2 px-3 rounded transition"
+//                         onClick={() => setShowDropdown(false)}
+//                       >
+//                         My Profile
+//                       </Link>
+//                       <Link
+//                         href="/orders"
+//                         className="block text-gray-300 hover:text-amber-400 hover:bg-gray-900 py-2 px-3 rounded transition"
+//                         onClick={() => setShowDropdown(false)}
+//                       >
+//                         My Orders
+//                       </Link>
+//                       <button
+//                         onClick={handleLogout}
+//                         className="w-full bg-amber-400 text-black font-semibold py-2 px-3 rounded hover:bg-amber-500 transition mt-2"
+//                       >
+//                         Logout
+//                       </button>
+//                     </div>
+//                   </div>
+//                 )}
+//               </div>
 //             )}
 //           </div>
+
+//           {/* Mobile Menu Button */}
+//           <button
+//             onClick={() => setMenuOpen(!menuOpen)}
+//             className="md:hidden text-3xl text-amber-400 hover:text-amber-500 transition"
+//           >
+//             {menuOpen ? "✕" : "☰"}
+//           </button>
 //         </div>
 
-//         {/* Mobile Menu - Show only when NOT logged in */}
-//         {!isLoggedIn && menuOpen && (
-//           <ul
-//             className={`md:hidden bg-black border-t border-amber-400/20 overflow-hidden transition-all duration-300 ${
-//               menuOpen ? "max-h-96 py-4" : "max-h-0"
-//             } rounded-b-lg shadow-lg`}
-//           >
+//         {/* Mobile Menu -*/}
+//         {menuOpen && (
+//           <ul className="md:hidden bg-black border-t border-amber-400/20 overflow-hidden transition-all duration-300 rounded-b-lg shadow-lg py-4">
 //             <li>
 //               <Link
 //                 href="/"
@@ -419,23 +399,66 @@
 //                 Contact
 //               </Link>
 //             </li>
+
+//             {isLoggedIn && (
+//               <>
+//                 <li>
+//                   <Link
+//                     href="/profile"
+//                     onClick={() => setMenuOpen(false)}
+//                     className="block px-5 py-2 rounded text-gray-300 transition hover:text-amber-400 hover:bg-gray-900"
+//                   >
+//                     My Profile
+//                   </Link>
+//                 </li>
+
+//                 <li>
+//                   <Link
+//                     href="/orders"
+//                     onClick={() => setMenuOpen(false)}
+//                     className="block px-5 py-2 rounded text-gray-300 transition hover:text-amber-400 hover:bg-gray-900"
+//                   >
+//                     My Orders
+//                   </Link>
+//                 </li>
+//               </>
+//             )}
 //             <li>
-//               <div className="flex items-center justify-between px-5 py-2">
-//                 <Link href="/cart" onClick={() => setMenuOpen(false)} className="flex-1">
-//                   <div className="relative inline-block">
+//               <div className="flex items-center justify-between gap-4 px-5 py-2">
+//                 {/* Cart */}
+//                 <Link href="/cart" onClick={() => setMenuOpen(false)}>
+//                   <div className="relative flex items-center justify-center w-10 h-10">
 //                     <FaShoppingCart className="text-amber-400 text-xl" />
 //                     {cartCount > 0 && (
-//                       <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+//                       <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
 //                         {cartCount > 99 ? "99+" : cartCount}
 //                       </span>
 //                     )}
 //                   </div>
 //                 </Link>
-//                 <Link href="/login" onClick={() => setMenuOpen(false)} className="flex-1">
-//                   <button className="w-full rounded-full bg-amber-400 py-2 text-black font-semibold transition cursor-pointer hover:bg-amber-500">
-//                     Login
+
+//                 {/* Button */}
+//                 {!isLoggedIn ? (
+//                   <Link
+//                     href="/login"
+//                     onClick={() => setMenuOpen(false)}
+//                     className="flex-1"
+//                   >
+//                     <button className="w-full rounded-full bg-amber-400 py-2 text-black font-semibold transition hover:bg-amber-500">
+//                       Login
+//                     </button>
+//                   </Link>
+//                 ) : (
+//                   <button
+//                     onClick={() => {
+//                       handleLogout();
+//                       setMenuOpen(false);
+//                     }}
+//                     className="flex-1 rounded-full bg-red-500 py-2 text-white font-semibold transition hover:bg-red-600"
+//                   >
+//                     Logout
 //                   </button>
-//                 </Link>
+//                 )}
 //               </div>
 //             </li>
 //           </ul>
@@ -477,6 +500,41 @@ export default function Navbar() {
       );
       setCartCount(totalItems);
     }
+  };
+
+  // Check if cart has items
+  const hasCartItems = () => {
+    if (typeof window !== "undefined") {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      return cart.length > 0;
+    }
+    return false;
+  };
+
+  // Handle Buy button click - Direct checkout without login check
+  const handleBuyClick = async (e) => {
+    e.preventDefault();
+    
+    // Check if cart has items
+    if (!hasCartItems()) {
+      Swal.fire({
+        title: "Empty Cart!",
+        text: "Please add items to your cart before proceeding to checkout.",
+        icon: "warning",
+        confirmButtonColor: "#f59e0b",
+        confirmButtonText: "Browse Products",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          router.push("/products");
+        }
+      });
+      return;
+    }
+
+    // Direct to checkout without checking login
+    // Set guest checkout flag
+    localStorage.setItem("guestCheckout", "true");
+    router.push("/checkout");
   };
 
   // Fetch user info from localStorage
@@ -530,7 +588,7 @@ export default function Navbar() {
   useEffect(() => {
     setHasMounted(true);
     checkLoginStatus();
-    loadCartCount(); // Load cart count on mount
+    loadCartCount();
 
     // Listen for cart updates
     const handleCartUpdate = () => {
@@ -539,7 +597,7 @@ export default function Navbar() {
 
     window.addEventListener("cartUpdated", handleCartUpdate);
 
-    // Listen for storage changes (when cart is updated in another tab)
+    // Listen for storage changes
     window.addEventListener("storage", (e) => {
       if (e.key === "cart") {
         loadCartCount();
@@ -621,21 +679,23 @@ export default function Navbar() {
     });
 
     if (result.isConfirmed) {
-      // Clear localStorage first
+      // Clear localStorage
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("user");
       localStorage.removeItem("token");
+      // Clear guest checkout flag if exists
+      localStorage.removeItem("guestCheckout");
       // Don't clear cart on logout - keep cart items
 
       // Update state
       setIsLoggedIn(false);
       setShowDropdown(false);
-      loadCartCount(); // Reload cart count after logout
+      loadCartCount();
 
-      // Trigger storage event manually to notify Dashboard
+      // Trigger storage event
       window.dispatchEvent(new Event("storage"));
 
-      // Navigate to home immediately
+      // Navigate to home
       router.push("/");
 
       // Success message
@@ -666,7 +726,7 @@ export default function Navbar() {
             />
           </Link>
 
-          {/* Desktop Menu -*/}
+          {/* Desktop Menu */}
           <ul className="hidden md:flex flex-1 justify-center items-center gap-8 text-md font-medium">
             <Link
               href="/"
@@ -706,6 +766,20 @@ export default function Navbar() {
                 )}
               </div>
             </Link>
+            
+            {/* Buy Button - Direct checkout without login */}
+            <button
+              onClick={handleBuyClick}
+              type="button"
+              className="relative rounded-full bg-amber-400 px-5 py-2 text-sm font-semibold text-black cursor-pointer hover:bg-amber-500 transition duration-300 shadow-md flex items-center justify-center"
+            >
+              Buy
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount > 99 ? "99+" : cartCount}
+                </span>
+              )}
+            </button>
 
             {!isLoggedIn ? (
               <Link href="/login">
@@ -794,7 +868,7 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Menu -*/}
+        {/* Mobile Menu */}
         {menuOpen && (
           <ul className="md:hidden bg-black border-t border-amber-400/20 overflow-hidden transition-all duration-300 rounded-b-lg shadow-lg py-4">
             <li>
@@ -871,7 +945,18 @@ export default function Navbar() {
                   </div>
                 </Link>
 
-                {/* Button */}
+                {/* Buy Button for Mobile - Direct checkout without login */}
+                <button
+                  onClick={() => {
+                    handleBuyClick();
+                    setMenuOpen(false);
+                  }}
+                  className="flex-1 rounded-full bg-amber-400 py-2 text-black font-semibold transition hover:bg-amber-500"
+                >
+                  Buy Now
+                </button>
+
+                {/* Login/Logout Button */}
                 {!isLoggedIn ? (
                   <Link
                     href="/login"
