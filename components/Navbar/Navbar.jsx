@@ -512,30 +512,30 @@ export default function Navbar() {
   };
 
   // Handle Buy button click - Direct checkout without login check
-  const handleBuyClick = async (e) => {
-    e.preventDefault();
+  // const handleBuyClick = async (e) => {
+  //   e.preventDefault();
     
-    // Check if cart has items
-    if (!hasCartItems()) {
-      Swal.fire({
-        title: "Empty Cart!",
-        text: "Please add items to your cart before proceeding to checkout.",
-        icon: "warning",
-        confirmButtonColor: "#f59e0b",
-        confirmButtonText: "Browse Products",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          router.push("/products");
-        }
-      });
-      return;
-    }
+  //   // Check if cart has items
+  //   if (!hasCartItems()) {
+  //     Swal.fire({
+  //       title: "Empty Cart!",
+  //       text: "Please add items to your cart before proceeding to checkout.",
+  //       icon: "warning",
+  //       confirmButtonColor: "#f59e0b",
+  //       confirmButtonText: "Browse Products",
+  //     }).then((result) => {
+  //       if (result.isConfirmed) {
+  //         router.push("/products");
+  //       }
+  //     });
+  //     return;
+  //   }
 
-    // Direct to checkout without checking login
-    // Set guest checkout flag
-    localStorage.setItem("guestCheckout", "true");
-    router.push("/checkout");
-  };
+  //   // Direct to checkout without checking login
+  //   // Set guest checkout flag
+  //   localStorage.setItem("guestCheckout", "true");
+  //   router.push("/checkout");
+  // };
 
   // Fetch user info from localStorage
   useEffect(() => {
@@ -768,7 +768,7 @@ export default function Navbar() {
             </Link>
             
             {/* Buy Button - Direct checkout without login */}
-            <button
+            {/* <button
               onClick={handleBuyClick}
               type="button"
               className="relative rounded-full bg-amber-400 px-5 py-2 text-sm font-semibold text-black cursor-pointer hover:bg-amber-500 transition duration-300 shadow-md flex items-center justify-center"
@@ -779,7 +779,7 @@ export default function Navbar() {
                   {cartCount > 99 ? "99+" : cartCount}
                 </span>
               )}
-            </button>
+            </button> */}
 
             {!isLoggedIn ? (
               <Link href="/login">
@@ -946,7 +946,7 @@ export default function Navbar() {
                 </Link>
 
                 {/* Buy Button for Mobile - Direct checkout without login */}
-                <button
+                {/* <button
                   onClick={() => {
                     handleBuyClick();
                     setMenuOpen(false);
@@ -954,7 +954,7 @@ export default function Navbar() {
                   className="flex-1 rounded-full bg-amber-400 py-2 text-black font-semibold transition hover:bg-amber-500"
                 >
                   Buy Now
-                </button>
+                </button> */}
 
                 {/* Login/Logout Button */}
                 {!isLoggedIn ? (
